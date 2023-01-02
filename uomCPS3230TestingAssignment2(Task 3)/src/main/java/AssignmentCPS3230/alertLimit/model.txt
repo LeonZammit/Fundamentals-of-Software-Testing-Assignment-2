@@ -1,0 +1,13 @@
+States:
+- staticAPI
+- invalidNumberOfAlerts
+
+Variables:
+- numOfAlerts (int) = 0;
+
+Transitions:
+- staticAPI -> staticAPI \ AlertCreated \ numOfAlerts ++;
+- staticAPI -> staticAPI \ AlertsDeleted \ numOfAlerts = 0;
+- staticAPI -> invalidNumberOfAlerts \ UserViewedAlerts \ numOfAlerts > 5;
+- staticAPI -> validNumberOfAlerts \ UserViewedAlerts \ numOfAlerts <= 5;
+
