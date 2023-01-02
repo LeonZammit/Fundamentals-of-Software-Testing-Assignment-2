@@ -1,0 +1,14 @@
+[marketAlertUmProp]AUTOMATON::> marketAlertUmProp() STATE::>homePage
+[alertLimitProp]AUTOMATON::> alertLimitProp() STATE::>staticAPI
+[marketAlertUmProp]AUTOMATON::> marketAlertUmProp() STATE::>homePage
+Valid Log In!
+[marketAlertUmProp]MOVED ON METHODCALL: void main.WebsiteRunner.UserValidLogIn() TO STATE::> alertsPage
+[alertLimitProp]AUTOMATON::> alertLimitProp() STATE::>staticAPI
+[marketAlertUmProp]AUTOMATON::> marketAlertUmProp() STATE::>alertsPage
+Alerts Page is loaded again!
+[marketAlertUmProp]MOVED ON METHODCALL: void main.WebsiteRunner.UserViewedAlerts() TO STATE::> alertsPage
+[alertLimitProp]AUTOMATON::> alertLimitProp() STATE::>staticAPI
+[marketAlertUmProp]AUTOMATON::> marketAlertUmProp() STATE::>alertsPage
+User has logged out and is directed to the Home Page
+[marketAlertUmProp]MOVED ON METHODCALL: void main.WebsiteRunner.UserLoggedOut() TO STATE::> homePage
+[alertLimitProp]AUTOMATON::> alertLimitProp() STATE::>staticAPI

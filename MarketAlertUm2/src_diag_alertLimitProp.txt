@@ -1,0 +1,10 @@
+digraph _logic_alertLimitProp {
+rankdir=LR;
+node [shape = circle]; staticAPI;
+node [shape = octagon]; invalidNumberOfAlerts;
+node [shape = point]; _s_s;
+_s_s -> staticAPI;
+staticAPI -> staticAPI [ label = "(1) AlertCreated\\\\numOfAlerts ++ ; System . out . println ( \" Alert Created! \" ) ; "];
+staticAPI -> staticAPI [ label = "(2) AlertsDeleted\\\\numOfAlerts = 0 ; System . out . println ( \" Alerts Deleted! \" ) ; "];
+staticAPI -> invalidNumberOfAlerts [ label = "(3) UserViewedAlerts\\numOfAlerts > 5 \\System . out . println ( \" Bad State, user has created more than 5 Alerts! \" ) ; "];
+}

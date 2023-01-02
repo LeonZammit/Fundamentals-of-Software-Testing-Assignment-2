@@ -1,0 +1,59 @@
+GLOBAL {
+	VARIABLES {
+		boolean isLogged = false;
+		int numOfAlerts =0;
+		}
+
+	EVENTS {
+
+		UserLoggedOut() = {*.UserLoggedOut()}
+		logInPressed() = {*.logInPressed()}
+		alertsPressed() = {*.alertsPressed()}
+		UserValidLogIn() = {WebsiteRunner.UserValidLogIn()}
+		UserInvalidLogIn() = {*.UserInvalidLogIn()}
+		UserViewedAlerts() = {WebsiteRunner.UserViewedAlerts()}
+		AlertCreated() = {WebsiteRunner.AlertCreated()}
+		AlertsDeleted() = {WebsiteRunner.AlertsDeleted()}
+	}
+
+	PROPERTY marketAlertUmProp {
+		STATES {   
+			NORMAL {
+				logInPage    
+				alertsPage
+			}
+			STARTING {
+				homePage    
+			}
+		}
+		TRANSITIONS {
+			
+			homePage -> logInPage [logInPressed()\isLogged == false\System.out.println("logInPage is clicked from Home Page(LP)!");] %%Cannot function this.
+			homePage -> alertsPage [UserValidLogIn()\\isLogged = true;System.out.println("Valid Log In!");] 
+			alertsPage -> homePage [UserLoggedOut()\isLogged == true\isLogged = false;System.out.println("User has logged out and is directed to the Home Page");] 
+			
+			logInPage -> logInPage [UserInvalidLogIn()\isLogged == false\isLogged = false;System.out.println("Invalid Log In!");] %%Assume this works.
+			
+			homePage -> alertsPage [alertsPressed()\isLogged == true\System.out.println("Alerts Page is clicked from Home Page!");] %% Cannot function this. 
+			alertsPage -> alertsPage [UserViewedAlerts()\\System.out.println("Alerts Page is loaded again!");] 
+			
+		}
+	}
+	
+	PROPERTY alertLimitProp {
+		STATES {
+			BAD {
+				invalidNumberOfAlerts
+			}
+			STARTING {
+				staticAPI
+			}
+		}
+		TRANSITIONS {
+			staticAPI -> staticAPI[AlertCreated()\\numOfAlerts++;System.out.println("Alert Created!");]
+			staticAPI -> staticAPI[AlertsDeleted()\\numOfAlerts = 0;System.out.println("Alerts Deleted!");]
+			
+			staticAPI -> invalidNumberOfAlerts[UserViewedAlerts()\numOfAlerts > 5\System.out.println("Bad State, user has created more than 5 Alerts!");]
+		}
+	}
+}

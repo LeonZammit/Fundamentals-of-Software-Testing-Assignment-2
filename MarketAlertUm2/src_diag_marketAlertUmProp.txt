@@ -1,0 +1,12 @@
+digraph _logic_marketAlertUmProp {
+rankdir=LR;
+node [shape = circle]; logInPage alertsPage homePage;
+node [shape = point]; _s_s;
+_s_s -> homePage;
+logInPage -> logInPage [ label = "(1) UserInvalidLogIn\\isLogged == false \\isLogged = false ; System . out . println ( \" Invalid Log In! \" ) ; "];
+alertsPage -> homePage [ label = "(1) UserLoggedOut\\isLogged == true \\isLogged = false ; System . out . println ( \" User has logged out and is directed to the Home Page \" ) ; "];
+alertsPage -> alertsPage [ label = "(2) UserViewedAlerts\\\\System . out . println ( \" Alerts Page is loaded again! \" ) ; "];
+homePage -> logInPage [ label = "(1) logInPressed\\isLogged == false \\System . out . println ( \" logInPage is clicked from Home Page(LP)! \" ) ; "];
+homePage -> alertsPage [ label = "(2) UserValidLogIn\\\\isLogged = true ; System . out . println ( \" Valid Log In! \" ) ; "];
+homePage -> alertsPage [ label = "(3) alertsPressed\\isLogged == true \\System . out . println ( \" Alerts Page is clicked from Home Page! \" ) ; "];
+}
